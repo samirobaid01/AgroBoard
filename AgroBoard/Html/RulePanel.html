@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html ng-app="dynamicFieldsPlugin">
+
+<head>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/app.js"></script>
+</head>
+
+<body>
+    <div ng-controller="dynamicFields" class="container">
+        <h1>Add telemetry information</h1>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Select Device:</label>
+                    <select class="form-control"
+                            ng-options="dev as dev.Name for dev in device" ng-model="selectedDev"
+                            ng-change="selectedItemChanged(selectedDev)">
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label>Select Telemetry Type:</label>
+                    <select class="form-control"
+                            ng-options="tel as tel.Name for tel in device.Telemetry" ng-model="selectedTel">
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label></label>
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" ng-click="addTelemetryInfo()" type="button">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Telemetry Info
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Device Name</th>
+                                        <th scope="col">Telemetry</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="tel in telemetryInfo">
+                                        <td>{{tel.deviceName}}</td>
+                                        <td>{{tel.Telemetry}}</td>
+                                        <td>{{tel.Value}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Rule
+                        </div>
+                        <div class="panel-body">
+                            <label for="ruleTextarea">Rule Expression</label>
+                            <textarea class="form-control" id="ruleTextarea" ng-model="QueryString" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Criteria
+                        </div>
+                        <div class="panel-body ">
+                            <label for="exampleTextarea">On Success</label>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label>Select Device:</label>
+                                        <select class="form-control"
+                                                ng-options="dev as dev.Name for dev in device" ng-model="selectedDevSuccess"
+                                                ng-change="selectedSuccessItemChanged(selectedDevSuccess)">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Select Telemetry Type:</label>
+                                        <select class="form-control"
+                                                ng-options="tel as tel.Name for tel in deviceSuccess.TelemetrySuccess" ng-model="selectedTelSuccess">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Telemetry data</label>
+                                        <input type="text" ng-model="telSuccessData" class="text-left" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label></label>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-success" ng-click="addSuccessTelemetryInfo()" type="button">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <table id="tabelRules" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Device Name</th>
+                                        <th scope="col">Telemetry</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="tel in telemetrySuccessInfo">
+                                        <td>{{tel.deviceName}}</td>
+                                        <td>{{tel.Telemetry}}</td>
+                                        <td>{{tel.Value}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-body ">
+                            <label for="exampleTextarea">Alternate</label>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label>Select Device:</label>
+                                        <select class="form-control"
+                                                ng-options="dev as dev.Name for dev in device" ng-model="selectedDevAlt"
+                                                ng-change="selectedAltItemChanged(selectedDevAlt)">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Select Telemetry Type:</label>
+                                        <select class="form-control"
+                                                ng-options="tel as tel.Name for tel in deviceAlt.TelemetryAlt" ng-model="selectedTelAlt">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>Telemetry data</label>
+                                        <input type="text" ng-model="telAltData" class="text-left" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label></label>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-success" ng-click="addAltTelemetryInfo()" type="button">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <table id="tabelRules" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Device Name</th>
+                                        <th scope="col">Telemetry</th>
+                                        <th scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="tel in telemetryAltInfo">
+                                        <td>{{tel.deviceName}}</td>
+                                        <td>{{tel.Telemetry}}</td>
+                                        <td>{{tel.Value}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" id="btnValidate">validate rule expression</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">View telemetry info</button>
+            <button class="btn btn-success" ng-click="addRule()">Save Rule</button>
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
