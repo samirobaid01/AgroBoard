@@ -83,7 +83,6 @@ namespace AgroBoard.Controllers
                 foreach (Telemetry t in device.Telemetry)
                 {
                     t.TelemetryData = (from data in db.TelemetryData.Where(dataInst => dataInst.TelemetryId == t.Id) select data).ToList();
-
                     telemetry = new LastTelemetry() { Name = device.Name, Variable = t.Variable, Value = (t.TelemetryData.LastOrDefault()).Value };
                 }
                 return Ok(telemetry);

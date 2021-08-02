@@ -7,9 +7,39 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/app.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--<script>
+        $(function () {
+            $("#draggable").draggable({
+                containment: "#draggableArea",
+                drag: function () {
+                    var offset = $(this).offset();
+                    var xPos = offset.left;
+                    var yPos = offset.top;
+                    $('#posX').text('x: ' + xPos);
+                    $('#posY').text('y: ' + yPos);
+                }
+            });
+            $("#draggable2").draggable({
+                containment: "#draggableArea"
+            });
+        });
+    </script>-->
 </head>
-
-<body>
+<body id="draggableArea">
+    <!--<div id="draggable" class="ui-widget-content col-sm-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Dragabel
+            </div>
+            <div class="panel-body">
+                <span id="posX"></span>
+                <span id="posY"></span>
+            </div>
+        </div>
+    </div>-->
+    
     <div ng-controller="dynamicFields" class="container">
         <h1>Add telemetry information</h1>
         <div class="form-group">
@@ -49,6 +79,7 @@
                                         <th scope="col">Device Name</th>
                                         <th scope="col">Telemetry</th>
                                         <th scope="col">Value</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,6 +87,11 @@
                                         <td>{{tel.deviceName}}</td>
                                         <td>{{tel.Telemetry}}</td>
                                         <td>{{tel.Value}}</td>
+                                        <td>
+                                            <a href="#">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -121,6 +157,7 @@
                                         <th scope="col">Device Name</th>
                                         <th scope="col">Telemetry</th>
                                         <th scope="col">Value</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,6 +165,11 @@
                                         <td>{{tel.deviceName}}</td>
                                         <td>{{tel.Telemetry}}</td>
                                         <td>{{tel.Value}}</td>
+                                        <td>
+                                            <a href="#">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -167,6 +209,7 @@
                                         <th scope="col">Device Name</th>
                                         <th scope="col">Telemetry</th>
                                         <th scope="col">Value</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -174,6 +217,11 @@
                                         <td>{{tel.deviceName}}</td>
                                         <td>{{tel.Telemetry}}</td>
                                         <td>{{tel.Value}}</td>
+                                        <td>
+                                            <a href="#">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -70,7 +70,7 @@ namespace AgroBoard.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Areas
+        // POST: api/Areas/PostArea
         [ResponseType(typeof(Area))]
         public IHttpActionResult PostArea(Area area)
         {

@@ -1,61 +1,47 @@
 var ngApp = angular.module('myApp', [])
-            ngApp.controller('myGetIdController',['$scope','$http', function($scope, $http){
+ngApp.controller('myGetIdController', ['$scope', '$http', function ($scope, $http) {
     var str = "";
-	$(document).ready(function(){
-    // Get value on button click and show alert
-    $("#myBtn").click(function(){
-        str = $("#myInput").val();
-        var getQueryString = "/api/Areas/"+str;
-        //alert("I am here");
-                    $http({
+    $(document).ready(function () {
+        // Get value on button click and show alert
+        $("#myBtn").click(function () {
+            str = $("#myInput").val();
+            var getQueryString = "/api/Areas/GetArea/" + str;
+            $http({
                 method: 'GET',
                 url: getQueryString,
-                    }).then(function successCallback(response) {
-                        //alert(JSON.stringify(response.data))
-                        $scope.areas = response.data;
-                        
-                    console.log("records fetched")
-                }, function errorCallback(response) {
-                    alert("NOTHING FOUND" );
-                });
+            }).then(function successCallback(response) {
+                $scope.areas = response.data;
+                console.log("records fetched")
+            }, function errorCallback(response) {
+                alert("NOTHING FOUND");
+            });
+        });
     });
-});
-                
-                
-				
-				
-            }])
-
-
+}]);
 ngApp.controller('AreapostController', function ($scope, $http) {
-
-
     $scope.Id = null;
     $scope.name = null;
     $scope.description = null;
 
     $scope.postData = function (Id, name, description) {
         //creating object
-             var data = {
+        var data = {
             Id: Id,
             name: name,
             description: description
         }
         //call http service
-        $http.post("/api/Areas", JSON.stringify(data))
+        alert(JSON.stringify(data));
+        $http.post("/api/Areas/PostArea", JSON.stringify(data))
             .then(function (response) {
-                
+
                 alert("Added Successfully");
             }, function errorCallback(response) {
-                alert("NOTHING Added");
+                alert(JSON.stringify(response));
             });
     }
-})
-
-
+});
 ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
-
-    
     $scope.name = null;
     $scope.description = null;
     $scope.protocol = null;
@@ -64,7 +50,7 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
     $scope.postData = function (name, description, protocol, Aid) {
         //creating object
         var data = {
-         
+
             name: name,
             description: description,
             protocol: protocol,
@@ -79,20 +65,7 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
                 alert("NOTHING Added");
             });
     }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 /*ngApp.controller('postController', function ($scope, Area) {
 
