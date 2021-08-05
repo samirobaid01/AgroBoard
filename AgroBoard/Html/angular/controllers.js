@@ -2,15 +2,24 @@ var ngApp = angular.module('myApp', [])
 ngApp.controller('myGetIdController', ['$scope', '$http', function ($scope, $http) {
     var str = "";
     $(document).ready(function () {
+        $http({
+            method: 'GET',
+            url: "/api/Areas/GetArea",
+        }).then(function successCallback(response) {
+            $scope.areas = response.data;
+        }, function errorCallback(response) {
+            alert("NOTHING FOUND");
+        });
         // Get value on button click and show alert
         $("#myBtn").click(function () {
+            $scope.areas = [];
             str = $("#myInput").val();
             var getQueryString = "/api/Areas/GetArea/" + str;
             $http({
                 method: 'GET',
                 url: getQueryString,
             }).then(function successCallback(response) {
-                $scope.areas = response.data;
+                $scope.areas.push(response.data);
                 console.log("records fetched")
             }, function errorCallback(response) {
                 alert("NOTHING FOUND");

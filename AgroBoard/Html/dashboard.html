@@ -32,8 +32,6 @@
 </head>
 
 <body class="bg-theme bg-theme14" ng-app="myApp" ng-controller="AreapostController">
-
-
     <!-- start loader -->
     <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner"><div class="loader"></div></div></div></div>
     <!-- end loader -->
@@ -227,93 +225,84 @@
 
         <div class="content-wrapper">
             <div class="container-fluid">
-
-
                 <div class="row" ng-app="myApp" ng-controller="myGetIdController">
-
                     <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">Find Area</div>
-                                <hr>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">Find Area</div>
+                                    <hr>
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="myInput"></label>
+                                            Enter Area Id: <input type="text" ng-model="id" class="form-control" id="myInput" placeholder="Area Id" /> <br />
+                                        </div>
 
-                                <form>
-                                    <div class="form-group">
-                                        <label for="myInput"></label>
-                                        Enter Area Id: <input type="text"  ng-model="id" class="form-control" id="myInput" placeholder="Area Id" /> <br />
-                                    </div>
+                                        <input type="button" value="Search" id="myBtn">
 
-                                    <input type="button" value="Search" id="myBtn" >
+                                    </form>
 
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Area Information</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Description</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>{{areas.Id}}</td>
-                                                    <td>{{areas.name}}</td>
-                                                    <td>{{areas.description}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </table>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div><!--End Row-->
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">Define Area</div>
+                                    <hr>
+                                    <form name="addAreaForm">
+                                        <div class="form-group">
+                                            <label for="input-1"></label>
+                                            <input type="text" class="form-control" id="input-1" placeholder="Id" ng-model="Id" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-2"></label>
+                                            <input type="text" class="form-control" id="input-2" placeholder="Title" ng-model="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-3"></label>
+                                            <input type="text" class="form-control" id="input-3" placeholder="Description" ng-model="description">
+                                        </div>
+                                        <input type="button" value="Add" id="addBtn" ng-disabled="addAreaForm.$invalid" ng-click="postData(Id, name, description)">
 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">Define Area</div>
-                                <hr>
+                                        <button type="button">
+                                            <a style="color:black" href="deviceAndSensor.html">
+                                                <span> Add DevicesAndSensors </span>
+                                            </a>
+                                        </button>
 
-                                <form name="addAreaForm">
-                                    <div class="form-group">
-                                        <label for="input-1"></label>
-                                        <input type="text" class="form-control" id="input-1" placeholder="Id" ng-model="Id" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="input-2"></label>
-                                        <input type="text" class="form-control" id="input-2" placeholder="Title" ng-model="name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="input-3"></label>
-                                        <input type="text" class="form-control" id="input-3" placeholder="Description" ng-model="description">
-                                    </div>
-                                    <input type="button" value="Add" id="addBtn" ng-disabled="addAreaForm.$invalid" ng-click="postData(Id, name, description)">
-
-                                    <button type="button"> 
-                                    <a style="color:black" href="deviceAndSensor.html"> 
-                                        <span> Add DevicesAndSensors </span>
-                                        </a=>
-                                    </button>
-
-                                </form>
+                                    </form>
 
 
+
+                                </div>
 
                             </div>
-
+                        </div>
+                    </div> 
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body" style="overflow: scroll;">
+                                <h5 class="card-title">Area Information</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="area in areas">
+                                                <td>{{area.Id}}</td>
+                                                <td>{{area.name}}</td>
+                                                <td>{{area.description}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div><!--End Row-->

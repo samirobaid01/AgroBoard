@@ -16,13 +16,13 @@ namespace AgroBoard.Controllers
     {
         private AgroboardDataEntities db = new AgroboardDataEntities();
 
-        // GET: api/Areas
+        // GET: api/Areas/GetArea
         public IQueryable<Area> GetArea()
         {
             return db.Area;
         }
 
-        // GET: api/Areas/5
+        // GET: api/Areas/GetArea/5
         [ResponseType(typeof(Area))]
         public IHttpActionResult GetArea(int id)
         {
