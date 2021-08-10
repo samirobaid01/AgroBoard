@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AgroboardDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="ntext" />
+    <Property Name="description" Type="ntext" />
+  </EntityType>
+  <EntityType Name="DeviceAndSensor">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="description" Type="ntext" />
+    <Property Name="Protocol" Type="nvarchar" MaxLength="10" />
+    <Property Name="aId" Type="int" />
+  </EntityType>
+  <EntityType Name="Rule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="RuleExpression" Type="text" />
+    <Property Name="QueryString" Type="text" />
+    <Property Name="Success" Type="text" />
+    <Property Name="Alternate" Type="text" />
+    <Property Name="TelemetryInfo" Type="text" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="ntext" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="deviceAndSensorName" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Telemetry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Variable" Type="nvarchar" MaxLength="50" />
+    <Property Name="DataType" Type="nvarchar" MaxLength="10" />
+    <Property Name="DeviceName" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="TelemetryData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="10" />
+    <Property Name="TelemetryId" Type="int" />
+  </EntityType>
+  <Association Name="FK_DeviceAndSensor_ToTable">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeviceAndSensor">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Status_ToTable">
+    <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="0..1" />
+    <End Role="Status" Type="Self.Status" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeviceAndSensor">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Status">
+        <PropertyRef Name="deviceAndSensorName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Telemetry_ToTable">
+    <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="0..1" />
+    <End Role="Telemetry" Type="Self.Telemetry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeviceAndSensor">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Telemetry">
+        <PropertyRef Name="DeviceName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TelemetryData_ToTable">
+    <End Role="Telemetry" Type="Self.Telemetry" Multiplicity="0..1" />
+    <End Role="TelemetryData" Type="Self.TelemetryData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Telemetry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TelemetryData">
+        <PropertyRef Name="TelemetryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AgroboardDataModelStoreContainer">
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeviceAndSensor" EntityType="Self.DeviceAndSensor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rule" EntityType="Self.Rule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Telemetry" EntityType="Self.Telemetry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TelemetryData" EntityType="Self.TelemetryData" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DeviceAndSensor_ToTable" Association="Self.FK_DeviceAndSensor_ToTable">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Status_ToTable" Association="Self.FK_Status_ToTable">
+      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
+      <End Role="Status" EntitySet="Status" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Telemetry_ToTable" Association="Self.FK_Telemetry_ToTable">
+      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
+      <End Role="Telemetry" EntitySet="Telemetry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TelemetryData_ToTable" Association="Self.FK_TelemetryData_ToTable">
+      <End Role="Telemetry" EntitySet="Telemetry" />
+      <End Role="TelemetryData" EntitySet="TelemetryData" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

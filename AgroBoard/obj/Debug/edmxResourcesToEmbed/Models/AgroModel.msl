@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AgroboardDataModelStoreContainer" CdmEntityContainer="AgroboardDataEntities">
+    <EntitySetMapping Name="Area">
+      <EntityTypeMapping TypeName="AgroboardDataModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceAndSensor">
+      <EntityTypeMapping TypeName="AgroboardDataModel.DeviceAndSensor">
+        <MappingFragment StoreEntitySet="DeviceAndSensor">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="Protocol" ColumnName="Protocol" />
+          <ScalarProperty Name="aId" ColumnName="aId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rule">
+      <EntityTypeMapping TypeName="AgroboardDataModel.Rule">
+        <MappingFragment StoreEntitySet="Rule">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RuleExpression" ColumnName="RuleExpression" />
+          <ScalarProperty Name="QueryString" ColumnName="QueryString" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
+          <ScalarProperty Name="Alternate" ColumnName="Alternate" />
+          <ScalarProperty Name="TelemetryInfo" ColumnName="TelemetryInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="AgroboardDataModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="deviceAndSensorName" ColumnName="deviceAndSensorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Telemetry">
+      <EntityTypeMapping TypeName="AgroboardDataModel.Telemetry">
+        <MappingFragment StoreEntitySet="Telemetry">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Variable" ColumnName="Variable" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TelemetryData">
+      <EntityTypeMapping TypeName="AgroboardDataModel.TelemetryData">
+        <MappingFragment StoreEntitySet="TelemetryData">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="TelemetryId" ColumnName="TelemetryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

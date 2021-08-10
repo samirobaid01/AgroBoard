@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AgroboardDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DeviceAndSensor" Relationship="Self.FK_DeviceAndSensor_ToTable" FromRole="Area" ToRole="DeviceAndSensor" />
+  </EntityType>
+  <EntityType Name="DeviceAndSensor">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Protocol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="aId" Type="Int32" />
+    <NavigationProperty Name="Area" Relationship="Self.FK_DeviceAndSensor_ToTable" FromRole="DeviceAndSensor" ToRole="Area" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Status_ToTable" FromRole="DeviceAndSensor" ToRole="Status" />
+    <NavigationProperty Name="Telemetry" Relationship="Self.FK_Telemetry_ToTable" FromRole="DeviceAndSensor" ToRole="Telemetry" />
+  </EntityType>
+  <EntityType Name="Rule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="RuleExpression" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="QueryString" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Success" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Alternate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TelemetryInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="deviceAndSensorName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DeviceAndSensor" Relationship="Self.FK_Status_ToTable" FromRole="Status" ToRole="DeviceAndSensor" />
+  </EntityType>
+  <EntityType Name="Telemetry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Variable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DataType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DeviceAndSensor" Relationship="Self.FK_Telemetry_ToTable" FromRole="Telemetry" ToRole="DeviceAndSensor" />
+    <NavigationProperty Name="TelemetryData" Relationship="Self.FK_TelemetryData_ToTable" FromRole="Telemetry" ToRole="TelemetryData" />
+  </EntityType>
+  <EntityType Name="TelemetryData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Value" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TelemetryId" Type="Int32" />
+    <NavigationProperty Name="Telemetry" Relationship="Self.FK_TelemetryData_ToTable" FromRole="TelemetryData" ToRole="Telemetry" />
+  </EntityType>
+  <Association Name="FK_DeviceAndSensor_ToTable">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeviceAndSensor">
+        <PropertyRef Name="aId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Status_ToTable">
+    <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="0..1" />
+    <End Role="Status" Type="Self.Status" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeviceAndSensor">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Status">
+        <PropertyRef Name="deviceAndSensorName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Telemetry_ToTable">
+    <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="0..1" />
+    <End Role="Telemetry" Type="Self.Telemetry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeviceAndSensor">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Telemetry">
+        <PropertyRef Name="DeviceName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TelemetryData_ToTable">
+    <End Role="Telemetry" Type="Self.Telemetry" Multiplicity="0..1" />
+    <End Role="TelemetryData" Type="Self.TelemetryData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Telemetry">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TelemetryData">
+        <PropertyRef Name="TelemetryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AgroboardDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Area" EntityType="Self.Area" />
+    <EntitySet Name="DeviceAndSensor" EntityType="Self.DeviceAndSensor" />
+    <EntitySet Name="Rule" EntityType="Self.Rule" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="Telemetry" EntityType="Self.Telemetry" />
+    <EntitySet Name="TelemetryData" EntityType="Self.TelemetryData" />
+    <AssociationSet Name="FK_DeviceAndSensor_ToTable" Association="Self.FK_DeviceAndSensor_ToTable">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Status_ToTable" Association="Self.FK_Status_ToTable">
+      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
+      <End Role="Status" EntitySet="Status" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Telemetry_ToTable" Association="Self.FK_Telemetry_ToTable">
+      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
+      <End Role="Telemetry" EntitySet="Telemetry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TelemetryData_ToTable" Association="Self.FK_TelemetryData_ToTable">
+      <End Role="Telemetry" EntitySet="Telemetry" />
+      <End Role="TelemetryData" EntitySet="TelemetryData" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

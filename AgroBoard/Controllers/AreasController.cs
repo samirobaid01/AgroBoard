@@ -35,6 +35,38 @@ namespace AgroBoard.Controllers
             return Ok(area);
         }
 
+        // GET: api/Areas/GetAreaInfo/5
+       [ResponseType(typeof(object))]
+        public IHttpActionResult GetAreaInfo(int id)
+        {
+
+            try
+            {
+                
+                Area selectedArea = (from area in db.Area.Where(a => a.Id == id) select area).SingleOrDefault();
+                selectedArea.DeviceAndSensor = (from devSen in db.DeviceAndSensor.Where(d => d.aId == selectedArea.Id) select devSen).ToList();
+                if (selectedArea.DeviceAndSensor != null && selectedArea.DeviceAndSensor.Count > 0)
+                {
+                    foreach (DeviceAndSensor devAndSens in selectedArea.DeviceAndSensor)
+                    {
+                        devAndSens.Telemetry = (from tel in db.Telemetry.Where(t => t.DeviceName == devAndSens.Name) select tel).ToList();
+                        if (devAndSens.Telemetry != null && devAndSens.Telemetry.Count > 0)
+                        {
+                            foreach (Telemetry telemetry in devAndSens.Telemetry)
+                            {
+                                telemetry.TelemetryData = (from telData in db.TelemetryData.Where(tData => tData.TelemetryId == telemetry.Id) select telData).ToList();
+                            }
+                        }
+                    }
+                }
+                return Ok(selectedArea);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         // PUT: api/Areas/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutArea(int id, Area area)

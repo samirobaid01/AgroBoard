@@ -226,6 +226,8 @@
     <Content Include="Global.asax" />
     <Content Include="Html\angular\angular.js" />
     <Content Include="Html\angular\controllers.js" />
+    <Content Include="Html\Area.html" />
+    <Content Include="Html\Areas.html" />
     <Content Include="Html\assets\css\animate.css" />
     <Content Include="Html\assets\css\app-style.css" />
     <Content Include="Html\assets\css\bootstrap.css" />
