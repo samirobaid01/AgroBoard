@@ -161,5 +161,36 @@ namespace AgroBoard.Controllers
         {
             return db.Area.Count(e => e.Id == id) > 0;
         }
+
+        public IHttpActionResult GetAreaJoin()
+
+        {
+            var areaInfo = (from a in db.Area
+                            join ds in db.DeviceAndSensor on a.Id equals ds.aId
+                            join tele in db.Telemetry on ds.Name equals tele.Variable
+                            join teleData in db.TelemetryData on tele.Id equals teleData.TelemetryId
+                            select new AreaInfo
+                            {
+                                aId = a.Id,
+                                aName = a.name,
+                                dsName = ds.Name,
+                                Protocol = ds.Protocol,
+                                Variable = tele.Variable,
+                                Value = teleData.Value
+                            }).ToList();
+
+
+            return Ok(areaInfo);
+        }
+    }
+
+    public class AreaInfo
+    {
+        public int aId { get; set; }
+        public string aName { get; set; }
+        public string dsName { get; set; }
+        public string Protocol { get; set; }
+        public string Variable { get; set; }
+        public string Value { get; set; }
     }
 }

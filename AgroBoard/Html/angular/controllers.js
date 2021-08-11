@@ -1,43 +1,33 @@
-//Get Area by id controller
 var ngApp = angular.module('myApp', [])
-ngApp.controller('myGetIdController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+ngApp.controller('myGetIdController', ['$scope', '$http', function ($scope, $http) {
     var str = "";
     $(document).ready(function () {
+        $http({
+            method: 'GET',
+            url: "/api/Areas/GetArea",
+        }).then(function successCallback(response) {
+            $scope.areas = response.data;
+        }, function errorCallback(response) {
+            alert("NOTHING FOUND");
+        });
         // Get value on button click and show alert
         $("#myBtn").click(function () {
+            $scope.areas = [];
             str = $("#myInput").val();
             var getQueryString = "/api/Areas/GetArea/" + str;
             $http({
                 method: 'GET',
                 url: getQueryString,
             }).then(function successCallback(response) {
-                $scope.areas = response.data;
+                $scope.areas.push(response.data);
                 console.log("records fetched")
             }, function errorCallback(response) {
                 alert("NOTHING FOUND");
             });
         });
-        $scope.AreaDetails = function (id) {
-            localStorage.setItem("areaId", id);
-            $window.location.href = "Area.html";
-        };
     });
 }]);
-ngApp.controller('myGetJoinController', ['$scope', '$http', function ($scope, $http) {
-   var Id = localStorage.getItem("areaId");
-    var getQueryString = "/api/Areas/GetAreaInfo/" + Id;
-    $http({
-        method: 'GET',
-        url: getQueryString,
-    }).then(function successCallback(response) {
-        $scope.res = response.data;
-        alert(JSON.stringify(response.data));
-        console.log("records fetched")
-    }, function errorCallback(response) {
-        alert("NOTHING FOUND");
-    });
-}]);
-// Define area controller 
+
 ngApp.controller('AreapostController', function ($scope, $http) {
     $scope.Id = null;
     $scope.name = null;
@@ -62,13 +52,11 @@ ngApp.controller('AreapostController', function ($scope, $http) {
     }
 });
 
-//Define deviceAndSensor controller
 ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
     $scope.name = null;
     $scope.description = null;
     $scope.protocol = null;
     $scope.Aid = null;
-
     $scope.postData = function (name, description, protocol, Aid) {
         //creating object
         var data = {
@@ -79,15 +67,31 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
             Aid: Aid
         }
         //call http service
-        $http.post("/api/DeviceAndSensors", JSON.stringify(data))
+        $http.post("/api/DeviceAndSensors/PostDeviceAndSensor", JSON.stringify(data))
             .then(function (response) {
-
                 alert("Added Successfully");
             }, function errorCallback(response) {
                 alert("NOTHING Added");
             });
     }
 });
+
+ngApp.controller('myGetAreaInfoController', ['$scope', '$http', function ($scope, $http) {
+
+    $(document).ready(function () {
+        $http({
+            method: 'GET',
+            url: "/api/Areas/GetAreaJoin",
+        }).then(function successCallback(response) {
+            alert("Im here in join controller");
+            $scope.info = response.data;
+            alert(response.data);
+        }, function errorCallback(response) {
+            alert("NOTHING FOUND");
+        });
+
+    });
+}]);
 
 /*ngApp.controller('postController', function ($scope, Area) {
 
@@ -128,7 +132,7 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
                 {
                     method: 'POST',
                     url: '/api/Areas',
-                   
+                  
                     data: JSON.stringify($scope.areas)
                 }).then(function (result) {
                     alert(result.data);
@@ -156,11 +160,11 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
     }
 })
 
-	
-	
+
+
        /*   ngApp.controller('myGetController',['$scope','$http', function($scope, $http){
-    
-                
+   
+               
                 $http({
             method: 'GET',
             url: 'https://localhost:44389/api/products'
@@ -171,15 +175,15 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
             }, function errorCallback(response) {
                 alert("NOTHING FOUND")
             });
-            
+           
                             // Simple GET request example:
-            
-            
+           
+           
         }])
 
             ngApp.controller('postCont', function($scope,$http){
-               
-            
+              
+           
                 $scope.postData = function(title, company, category, price, description){
                     //creating object
                     alert("post function called")
@@ -194,14 +198,14 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
                     $http.post("https://localhost:44389/api/products",data)
                     .then(function(response){
                         alert(response.data)
-                        
+                       
                     })
                 }
             })
 
             ngApp.controller('delCont', function($scope,$http){
-               
-            
+              
+           
                 $scope.delData = function(title){
                     //creating object
                     alert("delete function called")
@@ -209,8 +213,7 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
                     $http.delete("https://localhost:44389/api/products"+title)
                     .then(function(response){
                         alert(response.data)
-                        
+                       
                     })
                 }
             })*/
-            
