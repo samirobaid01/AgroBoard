@@ -21,7 +21,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RuleExpression" Type="text" />
     <Property Name="QueryString" Type="text" />
     <Property Name="Success" Type="text" />

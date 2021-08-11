@@ -1,10 +1,38 @@
 ﻿<!DOCTYPE html>
-<html ng-app="dynamicFieldsPlugin">
-
+<html lang="en" ng-app="dynamicFieldsPlugin">
 <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Smart Aquaponics System Desktop Web Application</title>
+    <!-- loader-->
+    <link href="assets/css/pace.min.css" rel="stylesheet" />
+    <script src="assets/js/pace.min.js"></script>
+    <!--favicon-->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- simplebar CSS-->
+    <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- animate CSS-->
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Icons CSS-->
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- Sidebar CSS-->
+    <link href="assets/css/sidebar-menu.css" rel="stylesheet" />
+    <!-- Custom Style-->
+    <link href="assets/css/app-style.css" rel="stylesheet" />
+    <!-- Angularjs link-->
+    <script src="angular/angular.js"></script>
+    <!-- Angularjs controllers-->
+    <script src="angular/controllers.js"></script>
+    <!-- Get values of rows clicked-->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="Scripts/jquery-3.4.1.min.js"></script>
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="Scripts/bootstrap.min.js"></script>
+    <!--<link href="../Content/bootstrap.min.css" rel="stylesheet" />-->
+    <!--<script src="Scripts/bootstrap.min.js"></script>-->
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/app.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -26,234 +54,444 @@
             });
         });
     </script>-->
+
 </head>
-<body id="draggableArea">
-    <!--<div id="draggable" class="ui-widget-content col-sm-3">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Dragabel
+
+<body class="bg-theme bg-theme14" id="draggableArea">
+<!-- start loader -->
+    <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner"><div class="loader"></div></div></div></div>
+    <!-- end loader -->
+    <!-- Start wrapper-->
+    <div id="wrapper">
+        <!--Start sidebar-wrapper-->
+        <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                    <h5 class="logo-text">AgroBoard</h5>
+                </a>
             </div>
-            <div class="panel-body">
-                <span id="posX"></span>
-                <span id="posY"></span>
-            </div>
+            <ul class="sidebar-menu do-nicescrol">
+                <li class="sidebar-header">MAIN NAVIGATION</li>
+                <li>
+                    <a href="dashboard.html">
+                        <img src="https://img.icons8.com/fluent-systems-regular/18/ffffff/dashboard-layout.png" />
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Areas.html">
+                        <img src="https://img.icons8.com/cotton/19/ffffff/hand-planting-1--v1.png" />
+                        <span>Areas</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="RulePanel.html">
+                        <img src="https://img.icons8.com/officexs/16/000000/rules.png" />
+                        <span>Rule Engine</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="sensors.html">
+                        <img src="https://img.icons8.com/ios-filled/20/ffffff/electrical-sensor.png" />
+                        <span>Sensors</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="devices.html">
+                        <img src="https://img.icons8.com/fluent-systems-filled/22/ffffff/bios.png" />
+                        <span>Devices</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="login.html" target="_blank">
+                        <i class="zmdi zmdi-lock"></i> <span>Login</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="register.html" target="_blank">
+                        <i class="zmdi zmdi-account-circle"></i> <span>Registration</span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-header">LABELS</li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
+                <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
+
+            </ul>
         </div>
-    </div>-->
-    
-    <div ng-controller="dynamicFields" class="container">
-        <h1>Add telemetry information</h1>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Select Device:</label>
-                    <select class="form-control"
-                            ng-options="dev as dev.Name for dev in device" ng-model="selectedDev"
-                            ng-change="selectedItemChanged(selectedDev)">
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label>Select Telemetry Type:</label>
-                    <select class="form-control"
-                            ng-options="tel as tel.Name for tel in device.Telemetry" ng-model="selectedTel">
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label></label>
-                    <div class="input-group-btn">
-                        <button class="btn btn-success" ng-click="addTelemetryInfo()" type="button">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Telemetry Info
-                        </div>
-                        <div class="panel-body">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Device Name</th>
-                                        <th scope="col">Telemetry</th>
-                                        <th scope="col">Value</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="tel in telemetryInfo">
-                                        <td>{{tel.deviceName}}</td>
-                                        <td>{{tel.Telemetry}}</td>
-                                        <td>{{tel.Value}}</td>
-                                        <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Rule
-                        </div>
-                        <div class="panel-body">
-                            <label for="ruleTextarea">Rule Expression</label>
-                            <textarea class="form-control" id="ruleTextarea" ng-model="QueryString" rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Criteria
-                        </div>
-                        <div class="panel-body ">
-                            <label for="exampleTextarea">On Success</label>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label>Select Device:</label>
-                                        <select class="form-control"
-                                                ng-options="dev as dev.Name for dev in device" ng-model="selectedDevSuccess"
-                                                ng-change="selectedSuccessItemChanged(selectedDevSuccess)">
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label>Select Telemetry Type:</label>
-                                        <select class="form-control"
-                                                ng-options="tel as tel.Name for tel in deviceSuccess.TelemetrySuccess" ng-model="selectedTelSuccess">
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label>Telemetry data</label>
-                                        <input type="text" ng-model="telSuccessData" class="text-left" />
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label></label>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-success" ng-click="addSuccessTelemetryInfo()" type="button">Add</button>
+        <!--End sidebar-wrapper-->
+        <!--Start topbar header-->
+        <header class="topbar-nav">
+            <nav class="navbar navbar-expand fixed-top">
+                <ul class="navbar-nav mr-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link toggle-menu" href="javascript:void();">
+                            <i class="icon-menu menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="search-bar">
+                            <input type="text" class="form-control" placeholder="Enter keywords">
+                            <a href="javascript:void();"><i class="icon-magnifier"></i></a>
+                        </form>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav align-items-center right-nav-link">
+                    <li class="nav-item dropdown-lg">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
+                            <i class="fa fa-envelope-open-o"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown-lg">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
+                            <i class="fa fa-bell-o"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
+                            <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-item user-details">
+                                <a href="javaScript:void();">
+                                    <div class="media">
+                                        <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                        <div class="media-body">
+                                            <h6 class="mt-2 user-title">Muhammad Hamza Rasheed</h6>
+                                            <p class="user-subtitle">hamza@example.com</p>
                                         </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <!--End topbar header-->
+
+        <div class="clearfix"></div>
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <!--<div id="draggable" class="ui-widget-content col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Dragabel
+                    </div>
+                    <div class="panel-body">
+                        <span id="posX"></span>
+                        <span id="posY"></span>
+                    </div>
+                </div>
+            </div>-->
+                <div class="card-title">Add telemetry information</div>
+                <div ng-controller="dynamicFields">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label> Select Device:</label>
+                                <select class="form-control"
+                                        ng-options="dev as dev.Name for dev in device" ng-model="selectedDev"
+                                        ng-change="selectedItemChanged(selectedDev)">
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label>Select Telemetry Type:</label>
+                                <select class="form-control"
+                                        ng-options="tel as tel.Name for tel in device.Telemetry" ng-model="selectedTel">
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label></label>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-white" ng-click="addTelemetryInfo()" type="button">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="card-title">  Telemetry Info</div>
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Device Name</th>
+                                                    <th scope="col">Telemetry</th>
+                                                    <th scope="col">Value</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="tel in telemetryInfo">
+                                                    <td>{{tel.deviceName}}</td>
+                                                    <td>{{tel.Telemetry}}</td>
+                                                    <td>{{tel.Value}}</td>
+                                                    <td>
+                                                        <a href="#">
+                                                            <span class="glyphicon glyphicon-trash"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <table id="tabelRules" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Device Name</th>
-                                        <th scope="col">Telemetry</th>
-                                        <th scope="col">Value</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="tel in telemetrySuccessInfo">
-                                        <td>{{tel.deviceName}}</td>
-                                        <td>{{tel.Telemetry}}</td>
-                                        <td>{{tel.Value}}</td>
-                                        <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
-                        <div class="panel-body ">
-                            <label for="exampleTextarea">Alternate</label>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label>Select Device:</label>
-                                        <select class="form-control"
-                                                ng-options="dev as dev.Name for dev in device" ng-model="selectedDevAlt"
-                                                ng-change="selectedAltItemChanged(selectedDevAlt)">
-                                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="card-title">Rule</div>
+
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label>Select Telemetry Type:</label>
-                                        <select class="form-control"
-                                                ng-options="tel as tel.Name for tel in deviceAlt.TelemetryAlt" ng-model="selectedTelAlt">
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label>Telemetry data</label>
-                                        <input type="text" ng-model="telAltData" class="text-left" />
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label></label>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-success" ng-click="addAltTelemetryInfo()" type="button">Add</button>
-                                        </div>
+                                    <div class="panel-body">
+                                        <label for="ruleTextarea">Rule Expression</label>
+                                        <textarea class="form-control" id="ruleTextarea" ng-model="QueryString" rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <table id="tabelRules" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Device Name</th>
-                                        <th scope="col">Telemetry</th>
-                                        <th scope="col">Value</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="tel in telemetryAltInfo">
-                                        <td>{{tel.deviceName}}</td>
-                                        <td>{{tel.Telemetry}}</td>
-                                        <td>{{tel.Value}}</td>
-                                        <td>
-                                            <a href="#">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="card-title">Criteria</div>
+
+                                    </div>
+                                    <div class="panel-body ">
+                                        <label for="exampleTextarea">On Success</label>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <label>Select Device:</label>
+                                                    <select class="form-control"
+                                                            ng-options="dev as dev.Name for dev in device" ng-model="selectedDevSuccess"
+                                                            ng-change="selectedSuccessItemChanged(selectedDevSuccess)">
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Select Telemetry Type:</label>
+                                                    <select class="form-control"
+                                                            ng-options="tel as tel.Name for tel in deviceSuccess.TelemetrySuccess" ng-model="selectedTelSuccess">
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Telemetry data</label>
+                                                    <input type="text" ng-model="telSuccessData" class="text-left" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label></label>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-white" ng-click="addSuccessTelemetryInfo()" type="button">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table id="tabelRules" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Device Name</th>
+                                                    <th scope="col">Telemetry</th>
+                                                    <th scope="col">Value</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="tel in telemetrySuccessInfo">
+                                                    <td>{{tel.deviceName}}</td>
+                                                    <td>{{tel.Telemetry}}</td>
+                                                    <td>{{tel.Value}}</td>
+                                                    <td>
+                                                        <a href="#">
+                                                            <span class="glyphicon glyphicon-trash"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="panel-body ">
+                                        <div class="card-title" for="exampleTextarea">Alternate</div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <label>Select Device:</label>
+                                                    <select class="form-control"
+                                                            ng-options="dev as dev.Name for dev in device" ng-model="selectedDevAlt"
+                                                            ng-change="selectedAltItemChanged(selectedDevAlt)">
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Select Telemetry Type:</label>
+                                                    <select class="form-control"
+                                                            ng-options="tel as tel.Name for tel in deviceAlt.TelemetryAlt" ng-model="selectedTelAlt">
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Telemetry data</label>
+                                                    <input type="text" ng-model="telAltData" class="text-left" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label></label>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-white" ng-click="addAltTelemetryInfo()" type="button">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <table id="tabelRules" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Device Name</th>
+                                                    <th scope="col">Telemetry</th>
+                                                    <th scope="col">Value</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="tel in telemetryAltInfo">
+                                                    <td>{{tel.deviceName}}</td>
+                                                    <td>{{tel.Telemetry}}</td>
+                                                    <td>{{tel.Value}}</td>
+                                                    <td>
+                                                        <a href="#">
+                                                            <span class="glyphicon glyphicon-trash"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-white" id="btnValidate">validate rule expression</button>
+                        <button class="btn btn-white" data-toggle="modal" data-target="#myModal">View telemetry info</button>
+                        <button class="btn btn-white" ng-click="addRule()">Save Rule</button>
+                        <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Modal Header</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Modal body text goes here.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white">Save changes</button>
+                                        <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!--start overlay-->
+                <div class="overlay toggle-menu"></div>
+                <!--end overlay-->
             </div>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary" id="btnValidate">validate rule expression</button>
-            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">View telemetry info</button>
-            <button class="btn btn-success" ng-click="addRule()">Save Rule</button>
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Modal Header</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Modal body text goes here.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
+            <!-- End container-fluid-->
+        </div><!--End content-wrapper-->
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+        <!--Start footer-->
+        <footer class="footer">
+            <div class="container">
+                <div class="text-center">
+                    Copyright © 2021 Smart Aquaponics System
                 </div>
             </div>
+        </footer>
+        <!--End footer-->
+        <!--start color switcher-->
+        <div class="right-sidebar">
+            <div class="switcher-icon">
+                <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+            </div>
+            <div class="right-sidebar-content">
+
+                <p class="mb-0">Gaussion Texture</p>
+                <hr>
+
+                <ul class="switcher">
+                    <li id="theme1"></li>
+                    <li id="theme2"></li>
+                    <li id="theme3"></li>
+                    <li id="theme4"></li>
+                    <li id="theme5"></li>
+                    <li id="theme6"></li>
+                </ul>
+
+                <p class="mb-0">Gradient Background</p>
+                <hr>
+
+                <ul class="switcher">
+                    <li id="theme7"></li>
+                    <li id="theme8"></li>
+                    <li id="theme9"></li>
+                    <li id="theme10"></li>
+                    <li id="theme11"></li>
+                    <li id="theme12"></li>
+                    <li id="theme13"></li>
+                    <li id="theme14"></li>
+                    <li id="theme15"></li>
+                </ul>
+
+            </div>
         </div>
-    </div>
+        <!--end color switcher-->
+    </div><!--End wrapper-->
+    <!-- Bootstrap core JavaScript-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- simplebar js -->
+    <script src="assets/plugins/simplebar/js/simplebar.js"></script>
+    <!-- sidebar-menu js -->
+    <script src="assets/js/sidebar-menu.js"></script>
+    <!-- Custom scripts -->
+    <script src="assets/js/app-script.js"></script>
 </body>
 
 </html>
-

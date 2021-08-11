@@ -61,18 +61,14 @@ namespace AgroBoard.Controllers
         {
             try
             {
-                db = new AgroboardDataEntities();
-                rule.TelemetryInfo.Replace('\\',' ');
-                rule.Success.Replace('\\', ' ');
-                rule.Alternate.Replace('\\', ' ');
-                rule = new Models.Rule();
+                db = new AgroboardDataEntities(); 
                 db.Rule.Add(rule);
                 db.SaveChanges();
                 return Ok();
             }
             catch (Exception e)
             {
-                return Ok(e.Message);
+                return Ok(e.InnerException.Message);
             }
 
         }
