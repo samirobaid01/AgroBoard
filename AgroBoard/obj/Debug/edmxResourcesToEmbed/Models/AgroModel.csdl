@@ -63,7 +63,7 @@
     <NavigationProperty Name="Telemetry" Relationship="Self.FK_TelemetryData_ToTable" FromRole="TelemetryData" ToRole="Telemetry" />
   </EntityType>
   <Association Name="FK_DeviceAndSensor_ToTable">
-    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="Area" Type="AgroboardDataModel.Area" Multiplicity="0..1" />
     <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Area">
@@ -111,7 +111,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="AgroboardDataEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Area" EntityType="Self.Area" />
+    <EntitySet Name="Area" EntityType="AgroboardDataModel.Area" />
     <EntitySet Name="DeviceAndSensor" EntityType="Self.DeviceAndSensor" />
     <EntitySet Name="Rule" EntityType="Self.Rule" />
     <EntitySet Name="Status" EntityType="Self.Status" />

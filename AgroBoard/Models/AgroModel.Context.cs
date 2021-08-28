@@ -18,6 +18,7 @@ namespace AgroBoard.Models
         public AgroboardDataEntities()
             : base("name=AgroboardDataEntities")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
