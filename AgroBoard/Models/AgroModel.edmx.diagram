@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5326bb55e0334604b9098d2d81979ac7" Name="Diagram1">
-        <EntityTypeShape EntityType="AgroboardDataModel.Area" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgroboardDataModel.developer" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AgroboardDataModel.DeviceAndSensor" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AgroboardDataModel.Rule" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AgroboardDataModel.Status" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />

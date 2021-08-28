@@ -135,7 +135,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AgroboardDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Area">
+        <EntityType Name="developer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -198,7 +198,7 @@
           <NavigationProperty Name="Telemetry" Relationship="Self.FK_TelemetryData_ToTable" FromRole="TelemetryData" ToRole="Telemetry" />
         </EntityType>
         <Association Name="FK_DeviceAndSensor_ToTable">
-          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Area" Type="AgroboardDataModel.developer" Multiplicity="0..1" />
           <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Area">
@@ -246,7 +246,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AgroboardDataEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Area" EntityType="Self.Area" />
+          <EntitySet Name="Area" EntityType="AgroboardDataModel.developer" />
           <EntitySet Name="DeviceAndSensor" EntityType="Self.DeviceAndSensor" />
           <EntitySet Name="Rule" EntityType="Self.Rule" />
           <EntitySet Name="Status" EntityType="Self.Status" />
@@ -276,7 +276,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AgroboardDataModelStoreContainer" CdmEntityContainer="AgroboardDataEntities">
           <EntitySetMapping Name="Area">
-            <EntityTypeMapping TypeName="AgroboardDataModel.Area">
+            <EntityTypeMapping TypeName="AgroboardDataModel.developer">
               <MappingFragment StoreEntitySet="Area">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="name" ColumnName="name" />
