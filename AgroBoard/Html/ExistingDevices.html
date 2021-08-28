@@ -173,7 +173,7 @@
         <div class="clearfix"></div>
 
         <div class="content-wrapper">
-            <div class="container-fluid">
+            <div class="container-fluid" ng-app="myApp" ng-controller="myGetDeviceAndSensorController">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -236,6 +236,36 @@
                             <span> View Telemetry Data </span>
                         </a>
                     </button>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">List of Devices</h5>
+                            <div class="table-responsive" style="overflow:scroll">
+                                <table class="table table-bordered">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Protocol</th>
+                                                <th scope="col">Area Id</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="ds in deviceAndSensor" style="cursor:pointer">
+                                                <td>{{ds.Name}}</td>
+                                                <td>{{ds.description}}</td>
+                                                <td>{{ds.Protocol}}</td>
+                                                <td>{{ds.aId}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!--start overlay-->
@@ -309,15 +339,13 @@
     <!-- Custom scripts -->
     <script src="assets/js/app-script.js"></script>
     <script>
-        function deviceAndSensor() {
+function deviceAndSensor() {
             document.getElementById("addSensorForm").style.display = "block";
-        }
-    </script>
+        }</script>
     <script>
-        function deviceAndSensor() {
+function deviceAndSensor() {
             document.getElementById("addDeviceForm").style.display = "block";
-        }
-    </script>
+        }</script>
 
 
 </body>

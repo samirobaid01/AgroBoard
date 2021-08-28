@@ -224,6 +224,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Html\AddDevice.html" />
+    <Content Include="Html\AddSensor.html" />
     <Content Include="Html\angular\angular.js" />
     <Content Include="Html\angular\controllers.js" />
     <Content Include="Html\Area.html" />
@@ -324,6 +326,8 @@
     <Content Include="Html\documentation\assets\blueprint-css\src\typography.css" />
     <Content Include="Html\documentation\assets\images\htmlstructure.png" />
     <Content Include="Html\documentation\index.html" />
+    <Content Include="Html\ExistingDevices.html" />
+    <Content Include="Html\ExistingSensors.html" />
     <Content Include="Html\forms.html" />
     <Content Include="Html\icons.html" />
     <Content Include="Html\index.html" />

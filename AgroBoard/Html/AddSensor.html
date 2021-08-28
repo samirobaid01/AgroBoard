@@ -238,6 +238,46 @@
                     </button>
                 </div>
 
+
+                <div class="row" ng-app="myApp" ng-controller="deviceAndSensorPostController">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">Add New Sensor</div>
+                                <form name="addSensorForm">
+                                    <div class="form-group">
+                                        <label for="input-1"></label>
+                                        <input type="text" class="form-control" id="input-1" placeholder="Name" ng-model="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-2"></label>
+                                        <input type="text" class="form-control" id="input-2" placeholder="Description" ng-model="description">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="input-3"></label>
+                                        <input type="text" class="form-control" id="input-3" placeholder="Protocol: HTTP/MQTT" ng-model="protocol" required>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="input-4"></label>
+                                        <input type="text" class="form-control" id="input-4" placeholder="Allocate to Area Id:" ng-model="Aid" required>
+
+                                    </div>
+
+                                    <input type="button" value="Add" id="addBtn" ng-disabled="addSensorForm.$invalid" ng-click="postData(name, description, protocol, Aid)" />
+                                    <button class=" btn-white">
+                                        <a style="color:black" href="">
+                                            <span> View Sensors </span>
+                                        </a>
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!--End Row-->
                 <!--start overlay-->
                 <div class="overlay toggle-menu"></div>
                 <!--end overlay-->
@@ -308,16 +348,6 @@
     <script src="assets/js/sidebar-menu.js"></script>
     <!-- Custom scripts -->
     <script src="assets/js/app-script.js"></script>
-    <script>
-        function deviceAndSensor() {
-            document.getElementById("addSensorForm").style.display = "block";
-        }
-    </script>
-    <script>
-        function deviceAndSensor() {
-            document.getElementById("addDeviceForm").style.display = "block";
-        }
-    </script>
 
 
 </body>

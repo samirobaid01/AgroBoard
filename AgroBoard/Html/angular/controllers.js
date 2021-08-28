@@ -92,7 +92,37 @@ ngApp.controller('myGetAreaInfoController', ['$scope', '$http', function ($scope
 
     });
 }]);
+ngApp.controller('myGetDeviceAndSensorController', ['$scope', '$http', function ($scope, $http) {
 
+    $(document).ready(function () {
+        $http({
+            method: 'GET',
+            url: "/api/DeviceAndSensors/GetDeviceAndSensor",
+        }).then(function successCallback(response) {
+            $scope.deviceAndSensor = response.data;
+        }, function errorCallback(response) {
+            alert("NOTHING FOUND");
+        });
+
+    });
+}]);
+
+ngApp.controller('myGetTelemetryDataController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
+
+    $interval(function () {
+        $(document).ready(function () {
+            $http({
+                method: 'GET',
+                url: "/api/TelemetryDatas/GetTelemetryData",
+            }).then(function successCallback(response) {
+                $scope.teleData = response.data;
+            }, function errorCallback(response) {
+                alert("NOTHING FOUND");
+            });
+
+        });
+    }, 1000);
+}]);
 /*ngApp.controller('postController', function ($scope, Area) {
 
     $scope.postData = function () {
