@@ -25,7 +25,7 @@ namespace AgroBoard.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<developer> Area { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
         public virtual DbSet<DeviceAndSensor> DeviceAndSensor { get; set; }
         public virtual DbSet<Rule> Rule { get; set; }
         public virtual DbSet<Status> Status { get; set; }
