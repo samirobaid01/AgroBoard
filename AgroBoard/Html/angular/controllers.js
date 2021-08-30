@@ -144,8 +144,7 @@ ngApp.controller('myGetDeviceAndSensorController', ['$scope', '$http', function 
 }]);
 
 ngApp.controller('myGetTelemetryDataController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
-
-    $interval(function () {
+       $interval(function () {
         $(document).ready(function () {
             $http({
                 method: 'GET',

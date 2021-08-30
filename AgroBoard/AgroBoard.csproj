@@ -357,6 +357,7 @@
     <Content Include="Html\status.html" />
     <Content Include="Html\tables.html" />
     <Content Include="Html\teleData.html" />
+    <Content Include="Html\TelemetryData.html" />
     <Content Include="Models\AgroModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AgroModel.Context.cs</LastGenOutput>
