@@ -17,8 +17,8 @@ namespace AgroBoard.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DeviceAndSensor()
         {
-            this.Status = new HashSet<Status>();
             this.Telemetry = new HashSet<Telemetry>();
+            this.Status = new HashSet<Status>();
         }
     
         public string Name { get; set; }
@@ -28,8 +28,8 @@ namespace AgroBoard.Models
     
         public virtual Area Area { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Status> Status { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Telemetry> Telemetry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Status> Status { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace AgroBoard.Models
     public partial class Status
     {
         public int Id { get; set; }
-        public string name { get; set; }
-        public Nullable<bool> isActive { get; set; }
-        public string deviceAndSensorName { get; set; }
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
+        public string DeviceName { get; set; }
     
         public virtual DeviceAndSensor DeviceAndSensor { get; set; }
     }

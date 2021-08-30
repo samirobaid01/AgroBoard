@@ -32,10 +32,10 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="name" Type="ntext" />
-    <Property Name="isActive" Type="bit" />
-    <Property Name="deviceAndSensorName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="ntext" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="DeviceName" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="Telemetry">
     <Key>
@@ -74,7 +74,7 @@
         <PropertyRef Name="Name" />
       </Principal>
       <Dependent Role="Status">
-        <PropertyRef Name="deviceAndSensorName" />
+        <PropertyRef Name="DeviceName" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
