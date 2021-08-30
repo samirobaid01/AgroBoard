@@ -69,8 +69,8 @@ namespace AgroBoard.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
         // POST: api/DeviceAndSensors
+        // IsActive will be null if it is declared as nullable in model class
         [ResponseType(typeof(DeviceAndSensor))]
         public IHttpActionResult PostDeviceAndSensor(DeviceAndSensor deviceAndSensor)
         {

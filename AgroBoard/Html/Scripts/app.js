@@ -33,9 +33,6 @@ app.controller("dynamicFields", function ($scope, $http) {
         function (error) { //on fail
             alert("Error" + error.status);
         });//close then 
-    //$scope.device = [{ id: 'dev1', Name: 'Temperature Sensor' }, { id: 'dev2', Name: 'Humidity Sensor' }, { id: 'dev3', Name: 'LDR Sensror' }];
-
-    //  var telemetry = [{ id: 'tel1', Name: 'temperature' }, { id: 'tel2', Name: 'Humidity' }, { id: 'tel3', Name: 'Light' }];
     $scope.panels = [];
     $scope.addNewPanel = function () {
         var newItemNo = $scope.panels.length + 1;

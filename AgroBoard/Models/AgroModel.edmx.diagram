@@ -8,13 +8,13 @@
         <EntityTypeShape EntityType="AgroboardDataModel.Area" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AgroboardDataModel.DeviceAndSensor" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AgroboardDataModel.Rule" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AgroboardDataModel.Status" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AgroboardDataModel.Telemetry" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgroboardDataModel.Telemetry" Width="1.5" PointX="5.375" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AgroboardDataModel.TelemetryData" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="AgroboardDataModel.FK_DeviceAndSensor_ToTable" ManuallyRouted="false" />
-        <AssociationConnector Association="AgroboardDataModel.FK_Status_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="AgroboardDataModel.FK_Telemetry_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="AgroboardDataModel.FK_TelemetryData_ToTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AgroboardDataModel.Status" Width="1.5" PointX="5.25" PointY="1.625" />
+        <AssociationConnector Association="AgroboardDataModel.FK_Status_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

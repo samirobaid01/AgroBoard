@@ -18,8 +18,8 @@
     <Property Name="Protocol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="aId" Type="Int32" />
     <NavigationProperty Name="Area" Relationship="Self.FK_DeviceAndSensor_ToTable" FromRole="DeviceAndSensor" ToRole="Area" />
-    <NavigationProperty Name="Status" Relationship="Self.FK_Status_ToTable" FromRole="DeviceAndSensor" ToRole="Status" />
     <NavigationProperty Name="Telemetry" Relationship="Self.FK_Telemetry_ToTable" FromRole="DeviceAndSensor" ToRole="Telemetry" />
+    <NavigationProperty Name="Status" Relationship="AgroboardDataModel.FK_Status_ToTable" FromRole="DeviceAndSensor" ToRole="Status" />
   </EntityType>
   <EntityType Name="Rule">
     <Key>
@@ -31,16 +31,6 @@
     <Property Name="Success" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Alternate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="TelemetryInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Status">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="isActive" Type="Boolean" />
-    <Property Name="deviceAndSensorName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="DeviceAndSensor" Relationship="Self.FK_Status_ToTable" FromRole="Status" ToRole="DeviceAndSensor" />
   </EntityType>
   <EntityType Name="Telemetry">
     <Key>
@@ -74,18 +64,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Status_ToTable">
-    <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="0..1" />
-    <End Role="Status" Type="Self.Status" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DeviceAndSensor">
-        <PropertyRef Name="Name" />
-      </Principal>
-      <Dependent Role="Status">
-        <PropertyRef Name="deviceAndSensorName" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Telemetry_ToTable">
     <End Role="DeviceAndSensor" Type="Self.DeviceAndSensor" Multiplicity="0..1" />
     <End Role="Telemetry" Type="Self.Telemetry" Multiplicity="*" />
@@ -114,16 +92,11 @@
     <EntitySet Name="Area" EntityType="AgroboardDataModel.Area" />
     <EntitySet Name="DeviceAndSensor" EntityType="Self.DeviceAndSensor" />
     <EntitySet Name="Rule" EntityType="Self.Rule" />
-    <EntitySet Name="Status" EntityType="Self.Status" />
     <EntitySet Name="Telemetry" EntityType="Self.Telemetry" />
     <EntitySet Name="TelemetryData" EntityType="Self.TelemetryData" />
     <AssociationSet Name="FK_DeviceAndSensor_ToTable" Association="Self.FK_DeviceAndSensor_ToTable">
       <End Role="Area" EntitySet="Area" />
       <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Status_ToTable" Association="Self.FK_Status_ToTable">
-      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
-      <End Role="Status" EntitySet="Status" />
     </AssociationSet>
     <AssociationSet Name="FK_Telemetry_ToTable" Association="Self.FK_Telemetry_ToTable">
       <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
@@ -133,5 +106,32 @@
       <End Role="Telemetry" EntitySet="Telemetry" />
       <End Role="TelemetryData" EntitySet="TelemetryData" />
     </AssociationSet>
+    <EntitySet Name="Status" EntityType="AgroboardDataModel.Status" />
+    <AssociationSet Name="FK_Status_ToTable" Association="AgroboardDataModel.FK_Status_ToTable">
+      <End Role="DeviceAndSensor" EntitySet="DeviceAndSensor" />
+      <End Role="Status" EntitySet="Status" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="DeviceName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DeviceAndSensor" Relationship="AgroboardDataModel.FK_Status_ToTable" FromRole="Status" ToRole="DeviceAndSensor" />
+  </EntityType>
+  <Association Name="FK_Status_ToTable">
+    <End Type="AgroboardDataModel.DeviceAndSensor" Role="DeviceAndSensor" Multiplicity="0..1" />
+    <End Type="AgroboardDataModel.Status" Role="Status" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeviceAndSensor">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Status">
+        <PropertyRef Name="DeviceName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
