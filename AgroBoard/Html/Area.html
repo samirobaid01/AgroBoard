@@ -179,7 +179,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Area Information</h5>
                             <div class="table-responsive" style="overflow:scroll">
-                                <table class="table table-bordered table table-hover" id="AreaJoinInfoTable">
+                                <table class="table table-hover" id="AreaJoinInfoTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
@@ -190,14 +190,14 @@
                                             <th scope="col">Data</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody ng-repeat="areaInstance in info">
                                         <tr>
-                                            <td>{{info.aId}}</td>
-                                            <td>{{info.aName}}</td>
-                                            <td>{{info.dsName}}</td>
-                                            <td>{{info.Protocol}}</td>
-                                            <td>{{info.Variable}}</td>
-                                            <td>{{info.Value}}</td>
+                                            <td>{{areaInstance.AreaId}}</td>
+                                            <td>{{areaInstance.AreaName}}</td>
+                                            <td>{{areaInstance.dsName}}</td>
+                                            <td>{{areaInstance.Protocol}}</td>
+                                            <td>{{areaInstance.Variable}}</td>
+                                            <td>{{areaInstance.Value}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -309,16 +309,14 @@
     <script src="assets/js/sidebar-menu.js"></script>
     <!-- Custom scripts -->
     <script src="assets/js/app-script.js"></script>
-    <script>
-        function deviceAndSensor() {
+    <script>function deviceAndSensor() {
             document.getElementById("addSensorForm").style.display = "block";
-        }
-    </script>
-    <script>
-        function deviceAndSensor() {
+        }</script>
+    <script>function deviceAndSensor() {
             document.getElementById("addDeviceForm").style.display = "block";
-        }
-    </script>
+        }</script>
+
+
 
 
 </body>

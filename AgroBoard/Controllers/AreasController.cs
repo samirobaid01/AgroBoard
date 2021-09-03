@@ -36,13 +36,13 @@ namespace AgroBoard.Controllers
         }
 
         // GET: api/Areas/GetAreaInfo/5
-       [ResponseType(typeof(object))]
+        [ResponseType(typeof(object))]
         public IHttpActionResult GetAreaInfo(int id)
         {
 
             try
             {
-                
+
                 Area selectedArea = (from area in db.Area.Where(a => a.Id == id) select area).SingleOrDefault();
                 selectedArea.DeviceAndSensor = (from devSen in db.DeviceAndSensor.Where(d => d.aId == selectedArea.Id) select devSen).ToList();
                 if (selectedArea.DeviceAndSensor != null && selectedArea.DeviceAndSensor.Count > 0)
@@ -61,7 +61,7 @@ namespace AgroBoard.Controllers
                 }
                 return Ok(selectedArea);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -162,34 +162,60 @@ namespace AgroBoard.Controllers
             return db.Area.Count(e => e.Id == id) > 0;
         }
 
-        public IHttpActionResult GetAreaJoin()
+        public IHttpActionResult GetAreaJoin(int areaId)
 
         {
-            var areaInfo = (from a in db.Area
-                            join ds in db.DeviceAndSensor on a.Id equals ds.aId
-                            join tele in db.Telemetry on ds.Name equals tele.Variable
-                            join teleData in db.TelemetryData on tele.Id equals teleData.TelemetryId
-                            select new AreaInfo
-                            {
-                                aId = a.Id,
-                                aName = a.name,
-                                dsName = ds.Name,
-                                Protocol = ds.Protocol,
-                                Variable = tele.Variable,
-                                Value = teleData.Value
-                            }).ToList();
+            List<AreaInfo> areaInfoList = (from a in db.Area
+                                           join
+                                           ds in db.DeviceAndSensor on a.Id equals ds.aId
+                                           join
+                                           tele in db.Telemetry on ds.Name equals tele.DeviceName
+                                           //join 
+                                           // teleData in db.TelemetryData on tele.Id equals teleData.TelemetryId
+                                           where a.Id == areaId
+                                           select new AreaInfo
+                                           {
+                                               AreaId = a.Id,
+                                               AreaName = a.name,
+                                               dsName = ds.Name,
+                                               Protocol = ds.Protocol,
+                                               Variable = tele.Variable,
+                                               TelemetryId = tele.Id,
+                                               //Value = teleData.Value
+                                           }).ToList();
+
+            foreach (AreaInfo areaInfoInstance in areaInfoList)
+            {
+                try
+                {
+                    List<TelemetryData> telDataList = (from telemetryDataList in db.TelemetryData.Where(t => t.TelemetryId == areaInfoInstance.TelemetryId) select telemetryDataList).ToList();//.LastOrDefault());//.Value;
+                    if (telDataList != null && telDataList.Count > 0)
+                    {
+                        TelemetryData telDataInst = telDataList[telDataList.Count - 1];
+                        areaInfoInstance.Value = telDataInst.Value;
+                    }
+                }
+
+                catch (Exception e)
+                {
+
+                    string messsage = e.Message;
+
+                }
+            }
 
 
-            return Ok(areaInfo);
+            return Ok(areaInfoList);
         }
     }
 
     public class AreaInfo
     {
-        public int aId { get; set; }
-        public string aName { get; set; }
+        public int AreaId { get; set; }
+        public string AreaName { get; set; }
         public string dsName { get; set; }
         public string Protocol { get; set; }
+        public int TelemetryId { get; set; }
         public string Variable { get; set; }
         public string Value { get; set; }
     }

@@ -234,25 +234,27 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">List of Areas</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <table class="table table-hover" id="listTable">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Description</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="area in areas" data-href="Area.html" style="cursor:pointer">
-                                                    <td>{{area.Id}}</td>
-                                                    <td>{{area.name}}</td>
-                                                    <td>{{area.description}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="table-responsive" style="overflow:scroll">
+
+                                    <table id="list" class="table table-hover">
+
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                            </tr>
+                                        </thead>
+                                        <!--data-href="Area.html" style="cursor:pointer"-->
+                                        <tbody ng-repeat="area in areas">
+                                            <tr ng-click="get(area)">
+                                                <td>{{area.Id}}</td>
+                                                <td>{{area.name}}</td>
+                                                <td>{{area.description}}</td>
+                                            </tr>
+                                        </tbody>
                                     </table>
+
                                 </div>
                             </div>
                         </div>
@@ -334,7 +336,6 @@
             document.getElementById("addDeviceAndSensorForm").style.display = "block";
         }
     </script>
-    <!-- Get clicked row values-->
     <!-- To check the clicked row and shift to respective defined href-->
     <script>
         $(document).ready(function () {
@@ -343,9 +344,9 @@
             });
         });
     </script>
-
-    <!--<script>
-        var table = document.getElementById('listTable');
+    <!-- Get clicked row values-->
+    <script>
+        var table = document.getElementById('list');
         for (var i = 1; i < table.rows.length; i++) {
             table.rows[i].onclick = function () {
                 alert("Row: " + table.rows[i] + " Clicked");
@@ -353,7 +354,7 @@
                 alert("Row id is: " + Id);
             };
         }
-    </script>-->
+    </script>
 
 </body>
 </html>
