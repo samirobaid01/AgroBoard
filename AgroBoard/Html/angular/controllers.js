@@ -10,7 +10,7 @@ ngApp.controller('myGetIdController', ['$scope', '$http', function ($scope, $htt
         }, function errorCallback(response) {
             alert("NOTHING FOUND");
         });
-        // Get value on button click and show alert
+        // Get value on button click
         $("#myBtn").click(function () {
             $scope.areas = [];
             str = $("#myInput").val();
@@ -26,6 +26,11 @@ ngApp.controller('myGetIdController', ['$scope', '$http', function ($scope, $htt
             });
         });
     });
+    $scope.get = function (area) {
+        localStorage.setItem("areaID", area.Id);
+        alert(localStorage.getItem("areaID"));
+        window.location = "Area.html";
+    }
 }]);
 
 ngApp.controller('AreapostController', function ($scope, $http) {
@@ -63,7 +68,7 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
             var Telemetry = {
                 variable: k,
                 datatype: v,
-                deviceName:name
+                deviceName: name
             };
             telemetryArray.push(Telemetry);
         });
@@ -90,7 +95,7 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
             var Telemetry = {
                 name: v.name,
                 IsAvtive: v.IsActive,
-                deviceName:name
+                deviceName: name
             };
             telemetryArray.push(Telemetry);
         });
@@ -113,23 +118,23 @@ ngApp.controller('deviceAndSensorPostController', function ($scope, $http) {
     }
 });
 
-ngApp.controller('myGetAreaInfoController', ['$scope', '$http', function ($scope, $http) {
+ngApp.controller('myGetAreaInfoController', ['$scope', '$interval', '$http', function ($scope, $interval, $http) {
+    $interval(function () {
+        $(document).ready(function () {
+            $http({
+                method: 'GET',
+                url: "/api/Areas/GetAreaJoin?areaId=" + localStorage.getItem("areaID"),
+            }).then(function successCallback(response) {
+                $scope.info = response.data;
+                //alert(JSON.stringify($scope.info));
+            }, function errorCallback(response) {
+                //alert("NOTHING FOUND");
+            });
 
-    $(document).ready(function () {
-        $http({
-            method: 'GET',
-            url: "/api/Areas/GetAreaJoin",
-        }).then(function successCallback(response) {
-            $scope.info = response.data;
-            alert(response.data);
-        }, function errorCallback(response) {
-            alert("NOTHING FOUND");
         });
-
-    });
+    }, 1000);
 }]);
 ngApp.controller('myGetDeviceAndSensorController', ['$scope', '$http', function ($scope, $http) {
-
     $(document).ready(function () {
         $http({
             method: 'GET',
@@ -144,7 +149,7 @@ ngApp.controller('myGetDeviceAndSensorController', ['$scope', '$http', function 
 }]);
 
 ngApp.controller('myGetTelemetryDataController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
-       $interval(function () {
+    $interval(function () {
         $(document).ready(function () {
             $http({
                 method: 'GET',
