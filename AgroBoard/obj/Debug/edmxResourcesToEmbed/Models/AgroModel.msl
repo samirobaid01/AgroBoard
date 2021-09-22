@@ -10,16 +10,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DeviceAndSensor">
-      <EntityTypeMapping TypeName="AgroboardDataModel.DeviceAndSensor">
-        <MappingFragment StoreEntitySet="DeviceAndSensor">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="Protocol" ColumnName="Protocol" />
-          <ScalarProperty Name="aId" ColumnName="aId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Rule">
       <EntityTypeMapping TypeName="AgroboardDataModel.Rule">
         <MappingFragment StoreEntitySet="Rule">
@@ -58,6 +48,17 @@
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceAndSensor">
+      <EntityTypeMapping TypeName="AgroboardDataModel.DeviceAndSensor">
+        <MappingFragment StoreEntitySet="DeviceAndSensor">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="aId" ColumnName="aId" />
+          <ScalarProperty Name="Protocol" ColumnName="Protocol" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

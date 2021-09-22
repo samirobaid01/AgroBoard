@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Smart Aquaponics System Desktop Web Application</title>
+    <title>Smart Aquaponics System Web Application</title>
     <!-- loader-->
     <link href="assets/css/pace.min.css" rel="stylesheet" />
     <script src="assets/js/pace.min.js"></script>
@@ -190,9 +190,7 @@
             </nav>
         </header>
         <!--End topbar header-->
-
         <div class="clearfix"></div>
-
         <div class="content-wrapper">
             <div class="container-fluid">
                 <!--<div id="draggable" class="ui-widget-content col-sm-3">
@@ -232,30 +230,30 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         <div class="card-title">  Telemetry Info</div>
-
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Device Name</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Type</th>
                                                     <th scope="col">Telemetry</th>
-                                                    <th scope="col">Value</th>
+                                                    <th scope="col">Telemetry data</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="tel in telemetryInfo">
                                                     <td>{{tel.deviceName}}</td>
+                                                    <td>{{tel.Type}}</td>
                                                     <td>{{tel.Telemetry}}</td>
-                                                    <td>{{tel.Value}}</td>
+                                                    <td>{{tel.TelemetryData}}</td>
                                                     <td>
                                                         <a href="#">
                                                             <span class="glyphicon glyphicon-trash"></span>
@@ -275,7 +273,6 @@
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         <div class="card-title">Rule</div>
-
                                     </div>
                                     <div class="panel-body">
                                         <label for="ruleTextarea">Rule Expression</label>
@@ -291,7 +288,6 @@
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         <div class="card-title">Criteria</div>
-
                                     </div>
                                     <div class="panel-body ">
                                         <label for="exampleTextarea">On Success</label>
@@ -325,17 +321,19 @@
                                         <table id="tabelRules" class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Device Name</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Type</th>
                                                     <th scope="col">Telemetry</th>
-                                                    <th scope="col">Value</th>
-                                                    <th>Action</th>
+                                                    <th scope="col">Telemetry data</th>
+                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="tel in telemetrySuccessInfo">
                                                     <td>{{tel.deviceName}}</td>
+                                                    <td>{{tel.Type}}</td>
                                                     <td>{{tel.Telemetry}}</td>
-                                                    <td>{{tel.Value}}</td>
+                                                    <td>{{tel.TelemetryData}}</td>
                                                     <td>
                                                         <a href="#">
                                                             <span class="glyphicon glyphicon-trash"></span>
@@ -378,17 +376,19 @@
                                         <table id="tabelRules" class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Device Name</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Type</th>
                                                     <th scope="col">Telemetry</th>
-                                                    <th scope="col">Value</th>
-                                                    <th>Action</th>
+                                                    <th scope="col">Telemetry data</th>
+                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="tel in telemetryAltInfo">
                                                     <td>{{tel.deviceName}}</td>
+                                                    <td>{{tel.Type}}</td>
                                                     <td>{{tel.Telemetry}}</td>
-                                                    <td>{{tel.Value}}</td>
+                                                    <td>{{tel.TelemetryData}}</td>
                                                     <td>
                                                         <a href="#">
                                                             <span class="glyphicon glyphicon-trash"></span>

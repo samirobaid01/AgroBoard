@@ -16,6 +16,7 @@
     <Property Name="description" Type="ntext" />
     <Property Name="Protocol" Type="nvarchar" MaxLength="10" />
     <Property Name="aId" Type="int" />
+    <Property Name="Type" Type="varchar" MaxLength="40" />
   </EntityType>
   <EntityType Name="Rule">
     <Key>

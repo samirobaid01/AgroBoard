@@ -19,6 +19,7 @@ namespace AgroBoard.Models
             : base("name=AgroboardDataEntities")
         {
             this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,10 +28,10 @@ namespace AgroBoard.Models
         }
     
         public virtual DbSet<Area> Area { get; set; }
-        public virtual DbSet<DeviceAndSensor> DeviceAndSensor { get; set; }
         public virtual DbSet<Rule> Rule { get; set; }
         public virtual DbSet<Telemetry> Telemetry { get; set; }
         public virtual DbSet<TelemetryData> TelemetryData { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<DeviceAndSensor> DeviceAndSensor { get; set; }
     }
 }
