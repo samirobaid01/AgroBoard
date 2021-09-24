@@ -16,13 +16,10 @@ namespace AgroBoard.Models
             List<Object> paramList = new List<Object>();
             foreach (KeyValuePair<string, object> d in telemetryStringData)
             {
-                Console.WriteLine(d.Key + " " + d.Value + "  " + d.Value.GetType().Name);
                 paramList.Add(d.Value);
                 expList.Add(System.Linq.Expressions.Expression.Parameter(d.Value.GetType(), d.Key));
             }
-
             ParameterExpression[] pExp = expList.ToArray();
-
             var parseRes = System.Linq.Dynamic.DynamicExpression.ParseLambda(pExp, null, expressionString);
             Object[] inputParam = paramList.ToArray();
             var result = parseRes.Compile().DynamicInvoke(inputParam);

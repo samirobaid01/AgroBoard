@@ -25,8 +25,8 @@ namespace AgroBoard.Models
         public string DataType { get; set; }
         public string DeviceName { get; set; }
     
-        public virtual DeviceAndSensor DeviceAndSensor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TelemetryData> TelemetryData { get; set; }
+        public virtual DeviceAndSensor DeviceAndSensor { get; set; }
     }
 }

@@ -293,6 +293,7 @@
     <Content Include="Html\assets\plugins\sparkline-charts\sparkline-chart-script.js" />
     <Content Include="Html\calendar.html" />
     <Content Include="Html\dashboard.html" />
+    <Content Include="Html\debugger.html" />
     <Content Include="Html\deviceAndSensor.html" />
     <Content Include="Html\devices.html" />
     <Content Include="Html\documentation\assets\blueprint-css\ie.css" />

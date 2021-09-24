@@ -16,7 +16,7 @@ namespace AgroBoard.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsActive { get; set; }
+        public Nullable<bool> IsActive { get; set; }
         public string DeviceName { get; set; }
     
         public virtual DeviceAndSensor DeviceAndSensor { get; set; }
