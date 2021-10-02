@@ -85,12 +85,10 @@ app.controller("dynamicFields", function ($scope, $http) {
                 for (var i = 0; i < response.data.length; i++) {
                     $scope.deviceSuccess.TelemetrySuccess.push({ 'Id': response.data[i].Id, 'Name': response.data[i].Name });
                 }
-
             },
             function (error) { //on fail
                 alert(JSON.stringify(error));
-            });//close then 
-
+            });//close then
     }
     $scope.selectedAltItemChanged = function (selectedDevAlt) {
         $scope.deviceAlt.TelemetryAlt = [];
@@ -109,7 +107,6 @@ app.controller("dynamicFields", function ($scope, $http) {
             function (error) { //on fail
                 alert(JSON.stringify(error));
             });//close then 
-
     }
     $scope.removeSelectedPanel = function (panel) {
         //remove panel on basis of id
@@ -128,7 +125,6 @@ app.controller("dynamicFields", function ($scope, $http) {
                 else {
                     $scope.telemetryInfo.push({ 'deviceName': response.data.DeviceName, 'Type': response.data.Type, 'Telemetry': response.data.Variable, 'TelemetryData': response.data.Value });
                     Telemetry.push({ 'deviceName': response.data.DeviceName, 'Type': response.data.Type, 'Telemetry': response.data.Variable });
-
                 }
             },
             function (error) {
