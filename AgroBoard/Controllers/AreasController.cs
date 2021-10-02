@@ -162,7 +162,7 @@ namespace AgroBoard.Controllers
             return db.Area.Count(e => e.Id == id) > 0;
         }
 
-        public IHttpActionResult GetAreaJoin(int areaId)
+        public IHttpActionResult GetSensorsTelemetry(int areaId)
 
         {
             List<AreaInfo> areaInfoList = (from a in db.Area
@@ -180,7 +180,7 @@ namespace AgroBoard.Controllers
                                                dsName = ds.Name,
                                                Protocol = ds.Protocol,
                                                Variable = tele.Variable,
-                                               TelemetryId = tele.Id,
+                                               TelemetryId = tele.Id
                                                //Value = teleData.Value
                                            }).ToList();
 
@@ -207,10 +207,46 @@ namespace AgroBoard.Controllers
 
             return Ok(areaInfoList);
         }
+        
+        public IHttpActionResult GetDeviceTelemetry(int areaId)
+        {
+            try
+            {
+                List<AreaInfo> areaInfoList = (from areaInstance in db.Area
+                                               join devAndSensor in db.DeviceAndSensor
+                                              on areaInstance.Id equals devAndSensor.aId
+                                               where areaInstance.Id == areaId && devAndSensor.Type == "device"
+                                               select new AreaInfo
+                                               {
+                                                   AreaId = areaInstance.Id,
+                                                   AreaName = areaInstance.name,
+                                                   dsName = devAndSensor.Name,
+                                                   Protocol = devAndSensor.Protocol,
+
+                                               }).ToList();
+                foreach (AreaInfo areaInfoInst in areaInfoList)
+                {
+                    List<Status> devStatusList = (from devInst in db.Status.Where(s => s.DeviceName == areaInfoInst.dsName) select devInst).ToList();
+                    foreach (Status s in devStatusList)
+                    {
+                        areaInfoInst.devStatus.Add(new DevStatus() { Name = s.Name, isActive = (bool)s.IsActive });
+                    }
+                }
+                return Ok(areaInfoList);
+            }
+            catch(Exception e)
+            {
+                return Ok(e.Message);
+            }
+        }
     }
 
     public class AreaInfo
     {
+        public AreaInfo()
+        {
+            devStatus = new List<DevStatus>();
+        }
         public int AreaId { get; set; }
         public string AreaName { get; set; }
         public string dsName { get; set; }
@@ -218,5 +254,13 @@ namespace AgroBoard.Controllers
         public int TelemetryId { get; set; }
         public string Variable { get; set; }
         public string Value { get; set; }
+        public List<DevStatus> devStatus { get; set; }
+
+    }
+    public class DevStatus
+    {
+        public int id { get; set; }
+        public String Name { get; set; }
+        public bool isActive { get; set; }
     }
 }
